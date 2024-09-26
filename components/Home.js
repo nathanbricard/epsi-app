@@ -1,6 +1,5 @@
 import { MyButton } from './MyButton.js';
 import { BottomNavBar } from './BottomNavBar';
-import { ParkingList } from './ParkingList.js';
 import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
 
 const Home = ({ navigation }) => {
@@ -11,7 +10,7 @@ const Home = ({ navigation }) => {
           <View style={styles.header}>
             <Text style={styles.title}>MobilEpsi</Text>
             <Image 
-              source={require('../assets/openart-b223699e-d9de-454a-9b81-855c695b5b31.png')} // Image locale
+              source={require('../assets/openart-b223699e-d9de-454a-9b81-855c695b5b31.png')} 
               style={styles.logo}
             />
           </View>
@@ -23,17 +22,13 @@ const Home = ({ navigation }) => {
           </View>
 
           <Image 
-            source={require('../assets/logo_epsi_8b6f0271b8.png')} // Image locale
+            source={require('../assets/logo_epsi_8b6f0271b8.png')}
             style={styles.homeImg}
             resizeMode="contain"
           />
-
-          {/* Ajout de la liste des parkings */}
-          <ParkingList />
         </View>
       </ScrollView>
       
-      {/* Barre de navigation */}
       <BottomNavBar navigation={navigation} />
     </>
   );
