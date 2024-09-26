@@ -1,5 +1,5 @@
 ## Description
-Le projet MobilEpsi (hybride PC / Mobile) a pour but de simplifier la mobilité des apprenants sur l'environnement de leur campus, trouver des moyens de locomotions éco-responsable comme des vélos ou trottinettes de la ville à proximité ou tout simplement voir les places de parking disponible sur le campus car c'est très compliqué de trouver des places et fait perdre un temps considérable de temps en temps.
+Le projet MobilEpsi (hybride PC / Mobile) a pour but de simplifier la mobilité des apprenants sur l'environnement de leur campus, trouver des moyens de locomotions éco-responsable comme des vélos ou trottinettes de la ville à proximité ou tout simplement voir les places de parking disponible sur le campus. C'est très compliqué de trouver des places et cela fait perdre un temps considérable de temps en temps.
 
 ## Prérequis
 Avant de commencer, assurez-vous d'avoir installé les éléments suivants sur votre machine :
