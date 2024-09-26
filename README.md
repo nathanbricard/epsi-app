@@ -14,6 +14,12 @@ Téléchargez et installez Node.js depuis le site (https://nodejs.org/). Vérifi
 ```bash
 node -v
 npm -v
+```
 
+### 2. Cloner le repository
+
+```bash
 git clone https://github.com/votre-utilisateur/votre-projet.git
 cd votre-projet
+```
+
