@@ -1,11 +1,19 @@
-# Sample Snack app
+## Description
+Le projet MobilEpsi (hybride PC / Mobile) a pour but de simplifier la mobilité des apprenants sur l'environnement de leur campus, trouver des moyens de locomotions éco-responsable comme des vélos ou trottinettes de la ville à proximité ou tout simplement voir les places de parking disponible sur le campus car c'est très compliqué de trouver des places et fait perdre un temps considérable de temps en temps.
 
-Open the `App.js` file to start writing some code. You can preview the changes directly on your phone or tablet by scanning the **QR code** or use the iOS or Android emulators. When you're done, click **Save** and share the link!
+## Prérequis
+Avant de commencer, assurez-vous d'avoir installé les éléments suivants sur votre machine :
 
-When you're ready to see everything that Expo provides (or if you want to use your own editor) you can **Download** your project and use it with [expo cli](https://docs.expo.dev/get-started/installation/#expo-cli)).
+- Node.js (version 14 ou supérieure)
+- npm (généralement installé avec Node.js)
 
-All projects created in Snack are publicly available, so you can easily share the link to this project via link, or embed it on a web page with the `<>` button.
+## Installation
 
-If you're having problems, you can tweet to us [@expo](https://twitter.com/expo) or ask in our [forums](https://forums.expo.dev/c/expo-dev-tools/61) or [Discord](https://chat.expo.dev/).
+### 1. Installer Node.js
+Téléchargez et installez Node.js depuis le site (https://nodejs.org/). Vérifiez l'installation avec :
+```bash
+node -v
+npm -v
 
-Snack is Open Source. You can find the code on the [GitHub repo](https://github.com/expo/snack).
+git clone https://github.com/votre-utilisateur/votre-projet.git
+cd votre-projet
