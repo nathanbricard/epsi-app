@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',
-    height: '100%', // Changez à '100%' pour que le BottomNavBar soit visible
+    height: '100%',
     alignItems: 'center',
     backgroundColor: '#5C6F68',
   },
@@ -172,34 +172,34 @@ const styles = StyleSheet.create({
   },
   map: {
     width: '100%',
-    height: '80%', // Gardez cela pour le style du MapView
+    height: '80%', 
   },
   markerContainer: {
     justifyContent: 'center',
     alignItems: 'center',
   },
   markerBackgroundParking: {
-    backgroundColor: 'blue', // ou 'red' selon vos besoins
-    borderRadius: 25, // ajustez selon la taille de votre icône
-    padding: 5, // espace autour de l'icône
+    backgroundColor: 'blue',
+    borderRadius: 25,
+    padding: 5, 
   },
   markerBackgroundBike: {
-    backgroundColor: 'brown', // ou 'red' selon vos besoins
-    borderRadius: 25, // ajustez selon la taille de votre icône
-    padding: 5, // espace autour de l'icône
+    backgroundColor: 'brown',
+    borderRadius: 25, 
+    padding: 5, 
   },
   markerBackgroundScooter: {
-    backgroundColor: 'green', // ou 'red' selon vos besoins
-    borderRadius: 25, // ajustez selon la taille de votre icône
-    padding: 5, // espace autour de l'icône
+    backgroundColor: 'green',
+    borderRadius: 25, 
+    padding: 5, 
   },
   markerIcon: {
-    width: 30, // ajustez selon votre icône
-    height: 30, // ajustez selon votre icône
+    width: 30, 
+    height: 30, 
   },
   accordion: {
     position: 'absolute',
-    bottom: 50, // Ajustez cette valeur si nécessaire pour donner de l'espace au BottomNavBar
+    bottom: 50, 
     left: 0,
     right: 0,
     backgroundColor: '#8AA39B',
