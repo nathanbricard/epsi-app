@@ -5,7 +5,6 @@ import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
 const Home = ({ navigation }) => {
   return (
     <>
-      <ScrollView style={styles.scrollView}>
         <View style={styles.container}>
           <View style={styles.header}>
             <Text style={styles.title}>MobilEpsi</Text>
@@ -27,7 +26,7 @@ const Home = ({ navigation }) => {
             resizeMode="contain"
           />
         </View>
-      </ScrollView>
+    
       
       <BottomNavBar navigation={navigation} />
     </>
@@ -35,9 +34,7 @@ const Home = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
-  scrollView: {
-    flex: 1,
-  },
+  
   container: {
     flex: 1,
     width: '100%',
