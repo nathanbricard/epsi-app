@@ -10,7 +10,7 @@ Avant de commencer, assurez-vous d'avoir installé les éléments suivants sur v
 ## Installation
 
 ### 1. Installer Node.js
-Téléchargez et installez Node.js depuis le site (https://nodejs.org/). Vérifiez l'installation avec :
+Téléchargez et installez Node.js depuis le site (https://nodejs.org/fr/download/package-manager). Vérifiez l'installation avec :
 ```bash
 node -v
 npm -v
