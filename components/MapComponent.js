@@ -1,12 +1,50 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, Text, Image, TouchableWithoutFeedback, Animated } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, View, Text, Image, TouchableWithoutFeedback, Animated, FlatList } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { BottomNavBar } from './BottomNavBar';
 
 const MapComponent = ({ navigation }) => {
   const [isAccordionOpen, setIsAccordionOpen] = useState(false);
   const [selectedMarker, setSelectedMarker] = useState(null);
-  const [accordionHeight] = useState(new Animated.Value(0));
+  const [accordionHeight] = useState(new Animated.Value(0)); // Valeur de la hauteur de l'accordéon pour l'ouverture fermeture
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Fonction pour récupérer les données de l'API
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://127.0.0.1:8000/random/parkings');
+        const json = await response.json();
+        setData(json); // Mettre à jour les données récupérées
+        setLoading(false); // Arrêter le loader après récupération
+      } catch (error) {
+        console.error(error);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const Item = ({ item }) => {
+    if (!item.status) {
+      return null; // Afficher uniquement si item.status est true pour savoir si la place est prise
+    }
+
+    return (
+      <Marker
+        coordinate={{ latitude: item.latitude, longitude: item.longitude }} //Coordonées de la place de parking
+        onPress={() => handleMarkerPress(String(item.sensor_id))}
+      >
+        <View style={styles.markerContainer}>
+          <View style={styles.markerBackgroundParking}>
+            <Image source={require('../assets/parking.png')} style={styles.markerIcon} />
+          </View>
+        </View>
+      </Marker>
+    );
+  };
 
   const initialRegion = {
     latitude: 47.4579292,
@@ -15,7 +53,7 @@ const MapComponent = ({ navigation }) => {
     longitudeDelta: 0.0421,
   };
 
-  const handleMarkerPress = (markerId) => {
+  const handleMarkerPress = (markerId) => { // gère les conditions d'ouverture et fermeture d'un accordéon 
     if (selectedMarker === markerId) {
       closeAccordion();
     } else {
@@ -26,7 +64,7 @@ const MapComponent = ({ navigation }) => {
     }
   };
 
-  const closeAccordion = (callback) => {
+  const closeAccordion = (callback) => { // Fermeture accordéon
     Animated.timing(accordionHeight, {
       toValue: 0,
       duration: 150,
@@ -37,7 +75,7 @@ const MapComponent = ({ navigation }) => {
     });
   };
 
-  const openAccordion = () => {
+  const openAccordion = () => { // Ouverture Accordeon
     Animated.timing(accordionHeight, {
       toValue: 200,
       duration: 150,
@@ -47,12 +85,20 @@ const MapComponent = ({ navigation }) => {
     });
   };
 
-  const handleMapPress = () => {
+  const handleMapPress = () => { // Abaisse l'accordeon ouvert lorsqu'on clique dans le vide
     if (isAccordionOpen) {
       closeAccordion();
       setSelectedMarker(null);
     }
   };
+
+  if (loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <Text style={styles.loadingText}>Chargement...</Text>
+      </View>
+    );
+  }
 
   return (
     <TouchableWithoutFeedback onPress={handleMapPress}>
@@ -70,45 +116,17 @@ const MapComponent = ({ navigation }) => {
           initialRegion={initialRegion}
           showsUserLocation={true}
         >
-          <Marker
-            coordinate={{ latitude: 47.4579292, longitude: -0.5137092 }}
-            title="Ma Position"
-            onPress={() => handleMarkerPress('marker1')}
-          >
-            <View style={styles.markerContainer}>
-              <View style={styles.markerBackgroundBike}>
-                <Image source={require('../assets/pedal_bike.png')} style={styles.markerIcon} />
-              </View>
-            </View>
-          </Marker>
-          <Marker
-            coordinate={{ latitude: 47.4579046, longitude: -0.5138500 }}
-            title="Une Autre Position"
-            onPress={() => handleMarkerPress('marker2')}
-          >
-            <View style={styles.markerContainer}>
-              <View style={styles.markerBackgroundScooter}>
-                <Image source={require('../assets/scooter.png')} style={styles.markerIcon} />
-              </View>
-            </View>
-          </Marker>
-          <Marker
-            coordinate={{ latitude: 47.4579999, longitude: -0.5139992 }}
-            title="Encore Une Position"
-            onPress={() => handleMarkerPress('marker3')}
-          >
-            <View style={styles.markerContainer}>
-              <View style={styles.markerBackgroundParking}>
-                <Image source={require('../assets/parking.png')} style={styles.markerIcon} />
-              </View>
-            </View>
-          </Marker>
+          {data.map(item => ( // Pour chaque item qui seront places sur la map
+            <Item key={item.sensor_id} item={item} />
+          ))}
         </MapView>
 
         <Animated.View style={[styles.accordion, { height: accordionHeight }]}>
           <View style={styles.accordionContent}>
-            {selectedMarker === 'marker1' && (
-              <Text>Informations sur Ma Position</Text>
+            {selectedMarker === 'marker1' && ( // Manque la gestion pour les markers appelés par l'API par manque de temps, à améliorer
+              <View style={styles.accordionDetail}>
+                <Text style={styles.accordionDetailContent}>Informations sur Ma Position</Text>
+              </View>
             )}
             {selectedMarker === 'marker2' && (
               <Text>Informations sur Une Autre Position</Text>
@@ -118,8 +136,7 @@ const MapComponent = ({ navigation }) => {
             )}
           </View>
         </Animated.View>
-        
-        {/* Inclure le BottomNavBar ici */}
+
         <BottomNavBar navigation={navigation} />
       </View>
     </TouchableWithoutFeedback>
@@ -127,6 +144,7 @@ const MapComponent = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+
   container: {
     flex: 1,
     width: '100%',
@@ -189,6 +207,20 @@ const styles = StyleSheet.create({
     elevation: 5,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
+  },
+  accordionDetail: {
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    backgroundColor: '#5C6F68',
+    height: '100%',
+    
+  },
+  accordionDetailContent: {
+  color: 'white',
+  paddingLeft: 15,
+  paddingTop: 15,
   },
   accordionContent: {
     padding: 15,
