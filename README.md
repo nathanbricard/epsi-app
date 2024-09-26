@@ -19,7 +19,18 @@ npm -v
 ### 2. Cloner le repository
 
 ```bash
-git clone https://github.com/votre-utilisateur/votre-projet.git
-cd votre-projet
+git clone https://github.com/nathanbricard/epsi-app.git
+cd epsi-app
 ```
 
+### 3.Installer les dépendances
+
+```bash
+npm install
+```
+
+### 4. Démarrage du projet
+
+```bash
+npm start
+```
